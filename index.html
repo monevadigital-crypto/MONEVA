@@ -1,0 +1,3233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MONEVA — Digital Experiences</title>
+
+<meta name="description"
+content="MONEVA creates premium websites and digital experiences for ambitious businesses.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --black:#050505;
+    --black2:#080808;
+    --white:#ffffff;
+    --green:#0B3D2E;
+    --green-light:#0e513c;
+    --gray:#A7A7A7;
+    --muted:#666;
+    --line:rgba(255,255,255,.09);
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--black);
+    color:var(--white);
+    font-family:"Inter",sans-serif;
+    overflow-x:hidden;
+}
+
+body.menu-open{
+    overflow:hidden;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button,
+input,
+textarea{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.container{
+    width:min(1200px,88%);
+    margin:auto;
+}
+
+.section{
+    position:relative;
+    padding:150px 0;
+}
+
+.section-label{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:10px;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+    color:#888;
+    margin-bottom:28px;
+}
+
+.section-label::before{
+    content:"";
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 20px rgba(11,61,46,.9);
+}
+
+
+/* LOADER */
+
+.loader{
+    position:fixed;
+    inset:0;
+    background:#050505;
+    z-index:99999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:opacity .6s ease,visibility .6s ease;
+}
+
+.loader.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+.loader-logo{
+    font-size:clamp(55px,12vw,170px);
+    font-weight:800;
+    letter-spacing:-.09em;
+    opacity:0;
+    transform:scale(.9);
+    animation:loaderLogo .7s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+@keyframes loaderLogo{
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+
+/* NAVBAR */
+
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:88px;
+    z-index:500;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 5vw;
+    background:linear-gradient(to bottom,rgba(5,5,5,.9),rgba(5,5,5,0));
+    transition:background .4s,height .4s,backdrop-filter .4s;
+}
+
+.navbar.scrolled{
+    height:72px;
+    background:rgba(5,5,5,.82);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--line);
+}
+
+.logo{
+    font-size:24px;
+    font-weight:800;
+    letter-spacing:-.075em;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:35px;
+}
+
+.nav-links a{
+    font-size:12px;
+    color:#999;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+.nav-project{
+    padding:13px 20px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:100px;
+    color:white!important;
+}
+
+.nav-project:hover{
+    background:white;
+    color:#050505!important;
+}
+
+.menu-btn{
+    display:none;
+    width:42px;
+    height:42px;
+    border:1px solid var(--line);
+    border-radius:50%;
+    background:none;
+    color:white;
+    font-size:16px;
+}
+
+
+/* MOBILE MENU */
+
+.mobile-menu{
+    position:fixed;
+    inset:0;
+    z-index:450;
+    background:#050505;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:10vw;
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-20px);
+    transition:.5s;
+}
+
+.mobile-menu.open{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+}
+
+.mobile-menu a{
+    font-size:clamp(38px,10vw,70px);
+    font-weight:700;
+    letter-spacing:-.06em;
+    padding:12px 0;
+    border-bottom:1px solid var(--line);
+}
+
+
+/* HERO */
+
+.hero{
+    position:relative;
+    height:100svh;
+    min-height:700px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.giant-logo{
+    position:absolute;
+    left:50%;
+    top:52%;
+    transform:translate(-50%,-50%) translate3d(var(--mx,0px),var(--my,0px),0);
+    font-size:clamp(130px,27vw,520px);
+    font-weight:800;
+    letter-spacing:-.11em;
+    line-height:.8;
+    color:transparent;
+    -webkit-text-stroke:1px rgba(255,255,255,.055);
+    white-space:nowrap;
+    pointer-events:none;
+    user-select:none;
+}
+
+.hero-glow{
+    position:absolute;
+    width:700px;
+    height:700px;
+    left:50%;
+    top:48%;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle,rgba(11,61,46,.38) 0%,rgba(11,61,46,.16) 25%,rgba(11,61,46,.04) 50%,transparent 72%);
+    filter:blur(35px);
+    animation:glow 7s ease-in-out infinite;
+    pointer-events:none;
+}
+
+@keyframes glow{
+    0%,100%{
+        transform:translate(-50%,-50%) scale(.9);
+        opacity:.6;
+    }
+    50%{
+        transform:translate(-50%,-50%) scale(1.12);
+        opacity:1;
+    }
+}
+
+.grain{
+    position:absolute;
+    inset:-50%;
+    opacity:.035;
+    pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+}
+
+.hero-content{
+    position:relative;
+    z-index:5;
+    width:min(1050px,90%);
+    text-align:center;
+    opacity:0;
+    transform:translateY(35px);
+    animation:heroIn 1.2s cubic-bezier(.16,1,.3,1) .6s forwards;
+}
+
+@keyframes heroIn{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-size:10px;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    color:#999;
+    margin-bottom:28px;
+}
+
+.eyebrow::before{
+    content:"";
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--green);
+}
+
+.hero h1{
+    font-size:clamp(55px,8.8vw,130px);
+    line-height:.86;
+    letter-spacing:-.085em;
+    font-weight:800;
+}
+
+.hero h1 span{
+    color:transparent;
+    -webkit-text-stroke:1px rgba(255,255,255,.8);
+}
+
+.hero-text{
+    max-width:540px;
+    margin:35px auto 0;
+    font-size:15px;
+    line-height:1.8;
+    color:var(--gray);
+}
+
+.hero-buttons{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    margin-top:38px;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:16px 25px;
+    border-radius:100px;
+    font-size:12px;
+    font-weight:600;
+    transition:.35s;
+}
+
+.btn-primary{
+    background:white;
+    color:#050505;
+}
+
+.btn-primary:hover{
+    background:var(--green);
+    color:white;
+    transform:translateY(-4px);
+}
+
+.btn-outline{
+    border:1px solid rgba(255,255,255,.18);
+    color:#ccc;
+}
+
+.btn-outline:hover{
+    border-color:white;
+    color:white;
+    transform:translateY(-4px);
+}
+
+.scroll-indicator{
+    position:absolute;
+    bottom:28px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    color:#555;
+    font-size:9px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+}
+
+.scroll-line{
+    width:1px;
+    height:40px;
+    background:linear-gradient(to bottom,rgba(255,255,255,.7),transparent);
+}
+
+
+/* WORK */
+
+.work{
+    background:#070707;
+}
+
+.work-heading{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:30px;
+    margin-bottom:70px;
+}
+
+.work-heading h2{
+    font-size:clamp(45px,7vw,100px);
+    line-height:.9;
+    letter-spacing:-.075em;
+}
+
+.work-heading h2 span{
+    color:#444;
+}
+
+.work-heading p{
+    max-width:300px;
+    font-size:13px;
+    line-height:1.8;
+    color:#777;
+}
+
+
+/* PROJECT CARDS */
+
+.projects{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:30px;
+    align-items:start;
+}
+
+.project{
+    position:relative;
+    width:100%;
+    min-width:0;
+    height:auto;
+    overflow:hidden;
+    background:#0b0b0b;
+    border:1px solid var(--line);
+    display:flex;
+    flex-direction:column;
+    transition:
+        transform .5s ease,
+        border-color .4s ease;
+}
+
+.project:nth-child(even){
+    margin-top:100px;
+}
+
+.project:hover{
+    transform:translateY(-6px);
+    border-color:rgba(255,255,255,.17);
+}
+
+.project-preview{
+    position:relative;
+    width:100%;
+    height:390px;
+    flex-shrink:0;
+    background:#fff;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+}
+
+.project-preview iframe{
+    width:100%;
+    height:100%;
+    border:none;
+    display:block;
+    background:#fff;
+}
+
+.project-preview::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:linear-gradient(
+        to bottom,
+        transparent 75%,
+        rgba(5,5,5,.18) 100%
+    );
+}
+
+.project-number{
+    position:absolute;
+    top:18px;
+    left:18px;
+    z-index:10;
+    padding:7px 10px;
+    background:rgba(5,5,5,.76);
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.12);
+    color:#aaa;
+    font-size:9px;
+    letter-spacing:.18em;
+}
+
+.project-info{
+    position:relative;
+    width:100%;
+    min-height:245px;
+    padding:25px 27px 27px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:stretch;
+    gap:20px;
+    background:#0b0b0b;
+}
+
+.project-details{
+    width:100%;
+    min-width:0;
+}
+
+.project-title{
+    font-size:28px;
+    line-height:1.05;
+    font-weight:700;
+    letter-spacing:-.05em;
+    color:white;
+}
+
+.project-type{
+    margin-top:8px;
+    font-size:9px;
+    line-height:1.4;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:#777;
+}
+
+.project-description{
+    margin-top:15px;
+    max-width:100%;
+    color:#999;
+    font-size:12px;
+    line-height:1.75;
+}
+
+.project-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    width:max-content;
+    max-width:100%;
+    margin-top:18px;
+    padding-bottom:6px;
+    color:#999;
+    font-size:10px;
+    line-height:1.4;
+    border-bottom:1px solid rgba(255,255,255,.18);
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    transition:.3s;
+}
+
+.project-link:hover{
+    color:white;
+    border-color:white;
+}
+
+.project-arrow{
+    width:48px;
+    height:48px;
+    min-width:48px;
+    align-self:flex-end;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:17px;
+    transition:
+        background .35s ease,
+        color .35s ease,
+        transform .35s ease;
+}
+
+.project-arrow:hover{
+    background:white;
+    color:#050505;
+    transform:rotate(45deg);
+}
+
+.projects-loading,
+.projects-empty{
+    grid-column:1 / -1;
+    width:100%;
+    min-height:250px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#555;
+    border:1px solid var(--line);
+    background:#080808;
+    font-size:12px;
+}
+
+
+/* SERVICES */
+
+.services{
+    background:#050505;
+}
+
+.services-top{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    margin-bottom:80px;
+}
+
+.services-top h2{
+    font-size:clamp(45px,7vw,100px);
+    line-height:.88;
+    letter-spacing:-.075em;
+}
+
+.services-top h2 span{
+    color:#444;
+}
+
+.services-intro{
+    max-width:310px;
+    font-size:13px;
+    line-height:1.8;
+    color:#777;
+}
+
+.service-list{
+    border-top:1px solid var(--line);
+}
+
+.service{
+    display:grid;
+    grid-template-columns:80px 1fr 40% 40px;
+    align-items:center;
+    min-height:150px;
+    border-bottom:1px solid var(--line);
+    transition:.4s;
+}
+
+.service:hover{
+    padding-left:20px;
+    background:rgba(255,255,255,.015);
+}
+
+.service-number{
+    font-size:11px;
+    color:#555;
+}
+
+.service-name{
+    font-size:clamp(24px,3vw,40px);
+    font-weight:600;
+    letter-spacing:-.055em;
+}
+
+.service-description{
+    max-width:390px;
+    font-size:12px;
+    line-height:1.8;
+    color:#777;
+}
+
+.service-arrow{
+    font-size:20px;
+    color:#555;
+}
+
+
+/* STATEMENT */
+
+.statement{
+    min-height:75vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:100px 7vw;
+    background:radial-gradient(circle at center,rgba(11,61,46,.12),transparent 50%);
+}
+
+.statement h2{
+    font-size:clamp(45px,8vw,115px);
+    line-height:.88;
+    letter-spacing:-.08em;
+    max-width:1100px;
+}
+
+.statement h2 span{
+    color:transparent;
+    -webkit-text-stroke:1px rgba(255,255,255,.65);
+}
+
+
+/* PROCESS */
+
+.process{
+    background:#080808;
+}
+
+.process-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:40px;
+    margin-bottom:80px;
+}
+
+.process-header h2{
+    font-size:clamp(45px,7vw,100px);
+    line-height:.88;
+    letter-spacing:-.075em;
+}
+
+.process-header h2 span{
+    color:#444;
+}
+
+.process-header p{
+    max-width:310px;
+    color:#777;
+    font-size:13px;
+    line-height:1.8;
+}
+
+.process-list{
+    border-top:1px solid var(--line);
+}
+
+.process-item{
+    display:grid;
+    grid-template-columns:100px 1fr 1fr;
+    gap:30px;
+    padding:45px 0;
+    border-bottom:1px solid var(--line);
+}
+
+.process-number{
+    font-size:11px;
+    color:#555;
+}
+
+.process-name{
+    font-size:clamp(28px,4vw,52px);
+    font-weight:600;
+    letter-spacing:-.06em;
+}
+
+.process-description{
+    color:#777;
+    font-size:13px;
+    line-height:1.9;
+    max-width:390px;
+}
+
+
+/* ABOUT */
+
+.about{
+    background:#050505;
+}
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:100px;
+    align-items:center;
+}
+
+.about-title{
+    font-size:clamp(45px,7vw,100px);
+    line-height:.88;
+    letter-spacing:-.075em;
+}
+
+.about-title span{
+    color:#444;
+}
+
+.about-copy{
+    color:#999;
+    font-size:15px;
+    line-height:2;
+    max-width:520px;
+}
+
+.about-copy strong{
+    color:white;
+}
+
+.about-stats{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1px;
+    margin-top:50px;
+    border:1px solid var(--line);
+}
+
+.stat{
+    padding:30px;
+    background:#080808;
+    border:1px solid var(--line);
+}
+
+.stat-number{
+    font-size:40px;
+    font-weight:700;
+}
+
+.stat-label{
+    margin-top:8px;
+    color:#666;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.15em;
+}
+
+
+/* CTA */
+
+.cta{
+    position:relative;
+    min-height:80vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+    background:#050505;
+}
+
+.cta::before{
+    content:"";
+    position:absolute;
+    width:650px;
+    height:650px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle,rgba(11,61,46,.25),transparent 65%);
+    filter:blur(20px);
+}
+
+.cta-content{
+    position:relative;
+    z-index:2;
+}
+
+.cta-label{
+    color:#777;
+    font-size:10px;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+    margin-bottom:25px;
+}
+
+.cta h2{
+    font-size:clamp(50px,9vw,125px);
+    line-height:.85;
+    letter-spacing:-.085em;
+}
+
+.cta h2 span{
+    color:transparent;
+    -webkit-text-stroke:1px rgba(255,255,255,.7);
+}
+
+.cta p{
+    max-width:470px;
+    margin:35px auto 0;
+    color:#777;
+    font-size:14px;
+    line-height:1.8;
+}
+
+.cta .btn{
+    margin-top:35px;
+}
+
+
+/* CONTACT */
+
+.contact{
+    background:#080808;
+}
+
+.contact-grid{
+    display:grid;
+    grid-template-columns:.8fr 1.2fr;
+    gap:100px;
+}
+
+.contact-title{
+    font-size:clamp(45px,6vw,85px);
+    line-height:.9;
+    letter-spacing:-.075em;
+}
+
+.contact-title span{
+    color:#444;
+}
+
+.contact-info{
+    margin-top:35px;
+}
+
+.contact-info p{
+    color:#777;
+    font-size:13px;
+    line-height:1.8;
+}
+
+.contact-email{
+    display:inline-block;
+    margin-top:20px;
+    color:white;
+    font-size:18px;
+    border-bottom:1px solid rgba(255,255,255,.2);
+    padding-bottom:7px;
+    transition:.3s;
+}
+
+.contact-email:hover{
+    border-color:white;
+}
+
+.contact-form{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.field{
+    position:relative;
+}
+
+.field input,
+.field textarea{
+    width:100%;
+    background:transparent;
+    border:none;
+    border-bottom:1px solid rgba(255,255,255,.16);
+    padding:18px 0;
+    color:white;
+    outline:none;
+    font-size:14px;
+}
+
+.field textarea{
+    min-height:130px;
+    resize:vertical;
+}
+
+.field label{
+    position:absolute;
+    left:0;
+    top:18px;
+    color:#666;
+    font-size:12px;
+    pointer-events:none;
+    transition:.3s;
+}
+
+.field input:focus + label,
+.field input:not(:placeholder-shown) + label,
+.field textarea:focus + label,
+.field textarea:not(:placeholder-shown) + label{
+    top:-5px;
+    font-size:9px;
+    color:#aaa;
+}
+
+.form-submit{
+    margin-top:15px;
+    align-self:flex-start;
+    border:none;
+    background:white;
+    color:#050505;
+    padding:16px 27px;
+    border-radius:100px;
+    font-size:12px;
+    font-weight:600;
+    transition:.35s;
+}
+
+.form-submit:hover{
+    background:var(--green);
+    color:white;
+    transform:translateY(-4px);
+}
+
+.form-submit:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+    transform:none;
+}
+
+
+/* DYNAMIC SOCIAL ICONS */
+
+.social-icons{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:25px;
+}
+
+.social-icon{
+    width:40px;
+    height:40px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#888;
+    font-size:12px;
+    transition:.35s;
+}
+
+.social-icon:hover{
+    background:white;
+    color:#050505;
+    border-color:white;
+    transform:translateY(-3px);
+}
+
+.social-icon svg{
+    width:17px;
+    height:17px;
+    fill:currentColor;
+}
+
+
+/* FOOTER */
+
+.footer{
+    background:#050505;
+    border-top:1px solid var(--line);
+    padding:70px 0 30px;
+}
+
+.footer-top{
+    display:flex;
+    justify-content:space-between;
+    gap:50px;
+    padding-bottom:70px;
+}
+
+.footer-logo{
+    font-size:40px;
+    font-weight:800;
+    letter-spacing:-.08em;
+}
+
+.footer-tagline{
+    max-width:280px;
+    color:#666;
+    font-size:12px;
+    line-height:1.8;
+    margin-top:15px;
+}
+
+.footer-links{
+    display:flex;
+    gap:60px;
+}
+
+.footer-column{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.footer-column-title{
+    color:#555;
+    font-size:9px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    margin-bottom:7px;
+}
+
+.footer-column a{
+    color:#888;
+    font-size:12px;
+}
+
+.footer-column a:hover{
+    color:white;
+}
+
+.footer-bottom{
+    padding-top:25px;
+    border-top:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    color:#444;
+    font-size:10px;
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .menu-btn{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .projects{
+        grid-template-columns:1fr;
+        gap:25px;
+    }
+
+    .project:nth-child(even){
+        margin-top:0;
+    }
+
+    .work-heading,
+    .services-top,
+    .process-header{
+        display:block;
+    }
+
+    .work-heading p,
+    .services-intro,
+    .process-header p{
+        margin-top:25px;
+    }
+
+    .service{
+        grid-template-columns:45px 1fr 30px;
+        padding:25px 0;
+    }
+
+    .service-description{
+        display:none;
+    }
+
+    .process-item{
+        grid-template-columns:50px 1fr;
+        gap:15px;
+    }
+
+    .process-description{
+        grid-column:2;
+    }
+
+    .about-grid{
+        grid-template-columns:1fr;
+        gap:60px;
+    }
+
+    .contact-grid{
+        grid-template-columns:1fr;
+        gap:60px;
+    }
+
+    .project-preview{
+        height:390px;
+    }
+
+    .project-info{
+        min-height:245px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .container{
+        width:88%;
+    }
+
+    .section{
+        padding:100px 0;
+    }
+
+    .navbar{
+        height:75px;
+        padding:0 6vw;
+    }
+
+    .logo{
+        font-size:21px;
+    }
+
+    .hero-text{
+        font-size:14px;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+    }
+
+    .btn{
+        width:220px;
+    }
+
+    .project{
+        width:100%;
+    }
+
+    .project-preview{
+        height:300px;
+    }
+
+    .project-info{
+        min-height:245px;
+        padding:21px 20px 22px;
+    }
+
+    .project-title{
+        font-size:23px;
+    }
+
+    .project-type{
+        font-size:8px;
+    }
+
+    .project-description{
+        font-size:11px;
+        line-height:1.7;
+    }
+
+    .project-link{
+        max-width:230px;
+        font-size:9px;
+    }
+
+    .project-arrow{
+        width:43px;
+        height:43px;
+        min-width:43px;
+        font-size:15px;
+    }
+
+    .about-stats{
+        grid-template-columns:1fr;
+    }
+
+    .form-row{
+        grid-template-columns:1fr;
+    }
+
+    .footer-top{
+        flex-direction:column;
+    }
+
+    .footer-links{
+        gap:40px;
+        flex-wrap:wrap;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+        gap:10px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="loader" id="loader">
+    <div class="loader-logo">MONEVA</div>
+</div>
+
+
+<header class="navbar" id="navbar">
+
+    <a href="#top" class="logo">MONEVA</a>
+
+    <nav class="nav-links">
+
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#about">About</a>
+
+        <a href="#contact" class="nav-project">
+            Start a Project ↗
+        </a>
+
+    </nav>
+
+    <button class="menu-btn" id="menuBtn">
+        ☰
+    </button>
+
+</header>
+
+
+<div class="mobile-menu" id="mobileMenu">
+
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#about">About</a>
+    <a href="#contact">Start a Project ↗</a>
+
+</div>
+
+
+<main id="top">
+
+
+<section class="hero">
+
+    <div class="giant-logo" id="giantLogo">
+        MONEVA
+    </div>
+
+    <div class="hero-glow"></div>
+    <div class="grain"></div>
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            Digital Experiences
+        </div>
+
+        <h1>
+            WE BUILD
+            <br>
+            <span>WHAT MATTERS.</span>
+        </h1>
+
+        <p class="hero-text">
+            Premium digital experiences designed
+            to make ambitious businesses stand out,
+            connect, and grow.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#contact" class="btn btn-primary">
+                Start a Project ↗
+            </a>
+
+            <a href="#work" class="btn btn-outline">
+                Explore Our Work
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="scroll-indicator">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+    </div>
+
+</section>
+
+
+<!-- WORK -->
+
+<section class="section work" id="work">
+
+<div class="container">
+
+<div class="section-label">
+    Selected Work
+</div>
+
+<div class="work-heading">
+
+    <h2>
+        BUILT TO
+        <br>
+        <span>STAND OUT.</span>
+    </h2>
+
+    <p>
+        A selection of digital experiences
+        created with strategy, design and
+        technology at the core.
+    </p>
+
+</div>
+
+
+<div class="projects" id="projectsContainer">
+
+    <div class="projects-loading">
+        Loading projects...
+    </div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- SERVICES -->
+
+<section class="section services" id="services">
+
+<div class="container">
+
+<div class="section-label">
+    What We Do
+</div>
+
+<div class="services-top">
+
+<h2>
+    DIGITAL
+    <br>
+    <span>CRAFT.</span>
+</h2>
+
+<p class="services-intro">
+    From first idea to final launch,
+    we create digital experiences
+    that look exceptional and work beautifully.
+</p>
+
+</div>
+
+
+<div class="service-list">
+
+<div class="service">
+
+<div class="service-number">01</div>
+
+<div class="service-name">
+    Web Design
+</div>
+
+<div class="service-description">
+    Distinctive interfaces designed
+    around your brand, audience
+    and business goals.
+</div>
+
+<div class="service-arrow">→</div>
+
+</div>
+
+
+<div class="service">
+
+<div class="service-number">02</div>
+
+<div class="service-name">
+    Web Development
+</div>
+
+<div class="service-description">
+    Fast, responsive and scalable
+    websites built with modern technologies.
+</div>
+
+<div class="service-arrow">→</div>
+
+</div>
+
+
+<div class="service">
+
+<div class="service-number">03</div>
+
+<div class="service-name">
+    E-Commerce
+</div>
+
+<div class="service-description">
+    Online stores designed to make
+    browsing, shopping and conversion
+    feel effortless.
+</div>
+
+<div class="service-arrow">→</div>
+
+</div>
+
+
+<div class="service">
+
+<div class="service-number">04</div>
+
+<div class="service-name">
+    Custom Systems
+</div>
+
+<div class="service-description">
+    Tailored digital solutions and
+    dashboards built around the way
+    your business actually works.
+</div>
+
+<div class="service-arrow">→</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="statement">
+
+<h2>
+    YOUR BUSINESS
+    <br>
+    DESERVES
+    <br>
+    <span>MORE THAN A TEMPLATE.</span>
+</h2>
+
+</section>
+
+
+<!-- PROCESS -->
+
+<section class="section process" id="process">
+
+<div class="container">
+
+<div class="section-label">
+    How We Work
+</div>
+
+<div class="process-header">
+
+<h2>
+    FROM IDEA
+    <br>
+    <span>TO LAUNCH.</span>
+</h2>
+
+<p>
+    A clear process keeps every project
+    focused, efficient and built around
+    the result.
+</p>
+
+</div>
+
+
+<div class="process-list">
+
+<div class="process-item">
+
+<div class="process-number">01</div>
+
+<div class="process-name">
+    Discover
+</div>
+
+<div class="process-description">
+    We understand your business,
+    your audience and what the
+    website needs to achieve.
+</div>
+
+</div>
+
+
+<div class="process-item">
+
+<div class="process-number">02</div>
+
+<div class="process-name">
+    Design
+</div>
+
+<div class="process-description">
+    We shape the visual direction,
+    structure and experience around
+    your brand.
+</div>
+
+</div>
+
+
+<div class="process-item">
+
+<div class="process-number">03</div>
+
+<div class="process-name">
+    Develop
+</div>
+
+<div class="process-description">
+    The approved concept becomes
+    a responsive, functional and
+    polished digital product.
+</div>
+
+</div>
+
+
+<div class="process-item">
+
+<div class="process-number">04</div>
+
+<div class="process-name">
+    Launch
+</div>
+
+<div class="process-description">
+    We test, review, refine and
+    prepare everything for the
+    final launch.
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section class="section about" id="about">
+
+<div class="container">
+
+<div class="section-label">
+    About MONEVA
+</div>
+
+<div class="about-grid">
+
+<div>
+
+<h2 class="about-title">
+
+DIGITAL
+
+<br>
+
+BUILT WITH
+
+<br>
+
+<span>INTENTION.</span>
+
+</h2>
+
+</div>
+
+
+<div>
+
+<div class="about-copy">
+
+MONEVA is a digital studio focused
+on creating <strong>premium websites
+and digital experiences</strong> for
+businesses that want to stand out.
+
+<br><br>
+
+We combine design, technology and
+strategy to turn ideas into digital
+experiences that feel clear,
+modern and memorable.
+
+</div>
+
+
+<div class="about-stats">
+
+<div class="stat">
+
+<div class="stat-number">
+01
+</div>
+
+<div class="stat-label">
+Focus
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-number">
+∞
+</div>
+
+<div class="stat-label">
+Possibilities
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="cta">
+
+<div class="cta-content">
+
+<div class="cta-label">
+    Have a project in mind?
+</div>
+
+<h2>
+    LET'S BUILD
+    <br>
+    <span>SOMETHING REMARKABLE.</span>
+</h2>
+
+<p>
+    Tell us about your business and
+    let's create something your customers
+    won't forget.
+</p>
+
+<a href="#contact" class="btn btn-primary">
+    Start a Project ↗
+</a>
+
+</div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section class="section contact" id="contact">
+
+<div class="container">
+
+<div class="section-label">
+    Start a Project
+</div>
+
+<div class="contact-grid">
+
+<div>
+
+<h2 class="contact-title">
+
+LET'S MAKE
+
+<br>
+
+IT
+
+<br>
+
+<span>HAPPEN.</span>
+
+</h2>
+
+
+<div class="contact-info">
+
+<p>
+    Ready to build something
+    different? Send us the details
+    and we'll get back to you.
+</p>
+
+<a
+    href="mailto:hello@moneva.com"
+    class="contact-email"
+    id="contactEmail">
+    hello@moneva.com
+</a>
+
+</div>
+
+</div>
+
+
+<form class="contact-form" id="contactForm">
+
+    <div id="dynamicContactFields">
+
+        <div class="form-row">
+
+            <div class="field">
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder=" "
+                    required>
+
+                <label for="name">
+                    Your Name
+                </label>
+
+            </div>
+
+
+            <div class="field">
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder=" "
+                    required>
+
+                <label for="email">
+                    Email
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <div class="field">
+
+            <input
+                type="text"
+                id="business"
+                placeholder=" "
+                required>
+
+            <label for="business">
+                Business / Brand
+            </label>
+
+        </div>
+
+
+        <div class="field">
+
+            <textarea
+                id="message"
+                placeholder=" "
+                required></textarea>
+
+            <label for="message">
+                Tell us about your project
+            </label>
+
+        </div>
+
+    </div>
+
+
+    <button
+        type="submit"
+        class="form-submit">
+
+        Send Project Request ↗
+
+    </button>
+
+</form>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+<div class="container">
+
+<div class="footer-top">
+
+<div>
+
+<div class="footer-logo">
+    MONEVA
+</div>
+
+<p class="footer-tagline">
+    Digital experiences for
+    ambitious businesses.
+</p>
+
+<div class="social-icons" id="socialIcons"></div>
+
+</div>
+
+
+<div class="footer-links">
+
+<div class="footer-column">
+
+<div class="footer-column-title">
+    Navigate
+</div>
+
+<a href="#work">Work</a>
+<a href="#services">Services</a>
+<a href="#process">Process</a>
+<a href="#about">About</a>
+
+</div>
+
+
+<div class="footer-column">
+
+<div class="footer-column-title">
+    Connect
+</div>
+
+<a href="#contact">Contact</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="footer-bottom">
+
+<span>
+    © 2026 MONEVA. All rights reserved.
+</span>
+
+<span>
+    Digital Experiences.
+</span>
+
+</div>
+
+</div>
+
+</footer>
+
+
+<!-- FIREBASE -->
+
+<script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore-compat.js"></script>
+
+
+<script>
+
+const firebaseConfig = {
+
+    apiKey:"AIzaSyB32wAhLS3mVzVM0MmAOL4rBsB82CNaL3E",
+
+    authDomain:"moneva-e89f9.firebaseapp.com",
+
+    projectId:"moneva-e89f9",
+
+    storageBucket:"moneva-e89f9.firebasestorage.app",
+
+    messagingSenderId:"802313072385",
+
+    appId:"1:802313072385:web:83410cf85fb10fe5393500"
+
+};
+
+
+firebase.initializeApp(firebaseConfig);
+
+const db=firebase.firestore();
+
+
+/* =====================================================
+   SITE SETTINGS
+===================================================== */
+
+let siteSettings={
+
+    contactForm:{
+
+        enabled:true,
+
+        recipientEmail:"hello@moneva.com",
+
+        fields:[
+
+            {
+                id:"name",
+                label:"Your Name",
+                type:"text",
+                required:true
+            },
+
+            {
+                id:"email",
+                label:"Email",
+                type:"email",
+                required:true
+            },
+
+            {
+                id:"business",
+                label:"Business / Brand",
+                type:"text",
+                required:true
+            },
+
+            {
+                id:"message",
+                label:"Tell us about your project",
+                type:"textarea",
+                required:true
+            }
+
+        ]
+
+    },
+
+    social:{
+
+        whatsapp:"",
+        instagram:"",
+        facebook:"",
+        tiktok:"",
+        youtube:"",
+        linkedin:""
+
+    }
+
+};
+
+
+/* =====================================================
+   SECURITY HELPERS
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function safeURL(value){
+
+    try{
+
+        const url =
+        new URL(
+            String(value || ""),
+            window.location.href
+        );
+
+        if(
+            url.protocol === "http:" ||
+            url.protocol === "https:"
+        ){
+
+            return url.href;
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Invalid URL:",
+            error
+        );
+
+    }
+
+    return "";
+
+}
+
+
+/* =====================================================
+   LOAD SITE SETTINGS
+===================================================== */
+
+async function loadSiteSettings(){
+
+    try{
+
+        const doc =
+        await db
+        .collection("settings")
+        .doc("site")
+        .get();
+
+
+        if(!doc.exists){
+
+            return;
+
+        }
+
+
+        const data=doc.data() || {};
+
+
+        siteSettings={
+
+            ...siteSettings,
+
+            ...data,
+
+            contactForm:{
+
+                ...siteSettings.contactForm,
+
+                ...(data.contactForm || {})
+
+            },
+
+            social:{
+
+                ...siteSettings.social,
+
+                ...(data.social || {})
+
+            }
+
+        };
+
+
+        /* EMAIL */
+
+        const recipient =
+        String(
+            siteSettings
+            .contactForm
+            .recipientEmail || ""
+        ).trim();
+
+
+        const contactEmail =
+        document.getElementById(
+            "contactEmail"
+        );
+
+
+        if(contactEmail && recipient){
+
+            contactEmail.textContent =
+            recipient;
+
+            contactEmail.href =
+            "mailto:" + recipient;
+
+        }
+
+
+        /* FORM */
+
+        if(
+            siteSettings.contactForm &&
+            Array.isArray(
+                siteSettings.contactForm.fields
+            )
+        ){
+
+            renderContactForm(
+                siteSettings.contactForm.fields
+            );
+
+        }
+
+
+        /* FORM ENABLED */
+
+        const contactForm =
+        document.getElementById(
+            "contactForm"
+        );
+
+
+        if(
+            contactForm &&
+            siteSettings.contactForm.enabled === false
+        ){
+
+            contactForm.style.display="none";
+
+        }
+
+
+        /* SOCIAL */
+
+        renderSocialIcons(
+            siteSettings.social
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "SITE SETTINGS ERROR:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   DYNAMIC CONTACT FORM
+===================================================== */
+
+function getFieldType(type){
+
+    const allowedTypes=[
+
+        "text",
+        "email",
+        "tel",
+        "number",
+        "textarea"
+
+    ];
+
+
+    return allowedTypes.includes(type)
+    ? type
+    : "text";
+
+}
+
+
+function renderContactForm(fields){
+
+    const container =
+    document.getElementById(
+        "dynamicContactFields"
+    );
+
+
+    if(!container){
+
+        return;
+
+    }
+
+
+    if(
+        !Array.isArray(fields) ||
+        fields.length===0
+    ){
+
+        container.innerHTML="";
+
+        return;
+
+    }
+
+
+    let html="";
+
+
+    fields.forEach((field,index)=>{
+
+        const id =
+        String(
+            field.id ||
+            ("field_"+index)
+        );
+
+
+        const label =
+        String(
+            field.label ||
+            "Field"
+        );
+
+
+        const type =
+        getFieldType(
+            field.type
+        );
+
+
+        const required =
+        field.required !== false;
+
+
+        const inputId =
+        "dynamic_" +
+        id.replace(
+            /[^a-zA-Z0-9_-]/g,
+            "_"
+        );
+
+
+        if(type==="textarea"){
+
+            html += `
+
+                <div class="field">
+
+                    <textarea
+                        id="${escapeHTML(inputId)}"
+                        data-field-id="${escapeHTML(id)}"
+                        data-field-type="${escapeHTML(type)}"
+                        placeholder=" "
+                        ${required ? "required" : ""}></textarea>
+
+                    <label for="${escapeHTML(inputId)}">
+
+                        ${escapeHTML(label)}
+
+                    </label>
+
+                </div>
+
+            `;
+
+        }else{
+
+            html += `
+
+                <div class="field">
+
+                    <input
+                        type="${escapeHTML(type)}"
+                        id="${escapeHTML(inputId)}"
+                        data-field-id="${escapeHTML(id)}"
+                        data-field-type="${escapeHTML(type)}"
+                        placeholder=" "
+                        ${required ? "required" : ""}>
+
+                    <label for="${escapeHTML(inputId)}">
+
+                        ${escapeHTML(label)}
+
+                    </label>
+
+                </div>
+
+            `;
+
+        }
+
+    });
+
+
+    container.innerHTML=html;
+
+}
+
+
+/* =====================================================
+   SOCIAL ICON SVG
+===================================================== */
+
+function socialSVG(type){
+
+    if(type==="instagram"){
+
+        return `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"/>
+            <circle cx="12" cy="12" r="4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"/>
+            <circle cx="17.5" cy="6.5" r="1"
+                fill="currentColor"/>
+        </svg>
+        `;
+
+    }
+
+
+    if(type==="facebook"){
+
+        return `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+                d="M14 8h3V4.5h-3.5C10.5 4.5 9 6.2 9 9.1V11H6v3.5h3V21h4v-6.5h3.2L17 11H13V9.5c0-.9.3-1.5 1-1.5Z"/>
+        </svg>
+        `;
+
+    }
+
+
+    if(type==="tiktok"){
+
+        return `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+                d="M15.5 3h3.1c.2 1.7 1.1 3.1 2.4 4v3.2c-1.5-.1-2.9-.6-4-1.5v6.4c0 3.6-2.5 5.9-6 5.9-3.1 0-5.5-2.1-5.5-5.2 0-3.2 2.6-5.4 5.7-5.4.4 0 .8 0 1.2.1v3.3c-.4-.1-.8-.2-1.2-.2-1.2 0-2.3.8-2.3 2.1 0 1.2.9 2 2.1 2 1.5 0 2.5-1 2.5-2.8V3h2Z"/>
+        </svg>
+        `;
+
+    }
+
+
+    if(type==="youtube"){
+
+        return `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+                d="M21.6 7.2a2.8 2.8 0 0 0-2-2C17.8 4.7 12 4.7 12 4.7s-5.8 0-7.6.5a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2 12a29 29 0 0 0 .4 4.8 2.8 2.8 0 0 0 2 2c1.8.5 7.6.5 7.6.5s5.8 0 7.6-.5a2.8 2.8 0 0 0 2-2A29 29 0 0 0 22 12a29 29 0 0 0-.4-4.8ZM10 15.3V8.7l5.7 3.3-5.7 3.3Z"/>
+        </svg>
+        `;
+
+    }
+
+
+    if(type==="linkedin"){
+
+        return `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+                d="M5.2 8.5H2V21h3.2V8.5ZM3.6 3A1.9 1.9 0 1 0 3.6 6.8 1.9 1.9 0 0 0 3.6 3ZM22 13.8c0-3.8-2-5.6-4.7-5.6-2.2 0-3.2 1.2-3.8 2v-1.7h-3.2V21h3.2v-6.2c0-1.6.3-3.1 2.3-3.1 2 0 2 1.8 2 3.2V21H21v-7.2c0-.1 0-.1 0 0Z"/>
+        </svg>
+        `;
+
+    }
+
+
+    if(type==="whatsapp"){
+
+        return `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+                d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.5 4.1 1.6 5.9L.2 24l6.5-1.7a11.8 11.8 0 0 0 5.4 1.3h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.1-1.2-6-3.5-8.3ZM12.2 21.5h-.1c-1.7 0-3.4-.5-4.8-1.3l-.3-.2-3.8 1 1-3.7-.2-.4a9.7 9.7 0 0 1-1.5-5.2c0-5.4 4.4-9.8 9.8-9.8 2.6 0 5.1 1 6.9 2.9a9.7 9.7 0 0 1 2.9 6.9c0 5.4-4.4 9.8-9.9 9.8Zm5.4-7.3c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.3-.6.1-1.6-.8-2.7-1.5-3.8-3.4-.3-.5.3-.5.8-1.7.1-.2.1-.4 0-.6-.1-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.3 3.6 5.6 4.9.8.3 1.4.5 1.9.6.8.2 1.5.2 2.1.1.6-.1 1.8-.7 2.1-1.3.3-.6.3-1.2.2-1.3 0-.2-.2-.3-.5-.4Z"/>
+        </svg>
+        `;
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =====================================================
+   RENDER SOCIAL ICONS
+===================================================== */
+
+function renderSocialIcons(social){
+
+    const container =
+    document.getElementById(
+        "socialIcons"
+    );
+
+
+    if(!container){
+
+        return;
+
+    }
+
+
+    container.innerHTML="";
+
+
+    const platforms=[
+
+        {
+            key:"instagram",
+            label:"Instagram"
+        },
+
+        {
+            key:"facebook",
+            label:"Facebook"
+        },
+
+        {
+            key:"tiktok",
+            label:"TikTok"
+        },
+
+        {
+            key:"youtube",
+            label:"YouTube"
+        },
+
+        {
+            key:"linkedin",
+            label:"LinkedIn"
+        },
+
+        {
+            key:"whatsapp",
+            label:"WhatsApp"
+        }
+
+    ];
+
+
+    platforms.forEach(platform=>{
+
+        const url =
+        safeURL(
+            social?.[platform.key]
+        );
+
+
+        if(!url){
+
+            return;
+
+        }
+
+
+        const link =
+        document.createElement("a");
+
+
+        link.className="social-icon";
+
+        link.href=url;
+
+        link.target="_blank";
+
+        link.rel="noopener noreferrer";
+
+        link.title=platform.label;
+
+        link.setAttribute(
+            "aria-label",
+            platform.label
+        );
+
+
+        link.innerHTML =
+        socialSVG(
+            platform.key
+        );
+
+
+        container.appendChild(link);
+
+    });
+
+}
+
+
+/* =====================================================
+   LOAD WEBSITE PROJECTS
+===================================================== */
+
+async function loadWebsiteProjects(){
+
+    const container =
+    document.getElementById(
+        "projectsContainer"
+    );
+
+
+    if(!container){
+
+        return;
+
+    }
+
+
+    try{
+
+        const snapshot =
+        await db
+        .collection("website_projects")
+        .get();
+
+
+        const projects =
+        snapshot.docs
+
+        .map(doc=>({
+
+            id:doc.id,
+            ...doc.data()
+
+        }))
+
+        .filter(project =>
+            project.visible !== false
+        )
+
+        .sort((a,b)=>{
+
+            const aTime =
+            a.createdAt &&
+            typeof a.createdAt.toMillis === "function"
+
+            ? a.createdAt.toMillis()
+
+            : 0;
+
+
+            const bTime =
+            b.createdAt &&
+            typeof b.createdAt.toMillis === "function"
+
+            ? b.createdAt.toMillis()
+
+            : 0;
+
+
+            return bTime-aTime;
+
+        });
+
+
+        if(projects.length===0){
+
+            container.innerHTML=`
+
+                <div class="projects-empty">
+
+                    No projects available yet.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        container.innerHTML="";
+
+
+        projects.forEach((project,index)=>{
+
+            const number =
+            String(index+1).padStart(2,"0");
+
+
+            const total =
+            String(projects.length).padStart(2,"0");
+
+
+            const url =
+            safeURL(project.url);
+
+
+            const card =
+            document.createElement("article");
+
+
+            card.className="project";
+
+
+            card.innerHTML=`
+
+                <div class="project-preview">
+
+                    ${
+                        url
+                        ?
+                        `
+                        <iframe
+                            src="${escapeHTML(url)}"
+                            title="${escapeHTML(
+                                project.name ||
+                                "Project website"
+                            )}"
+                            loading="lazy"
+                            referrerpolicy="strict-origin-when-cross-origin">
+                        </iframe>
+                        `
+                        :
+                        `
+                        <div style="
+                            width:100%;
+                            height:100%;
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                            background:#0b0b0b;
+                            color:#555;
+                            font-size:12px;
+                        ">
+                            Website preview unavailable
+                        </div>
+                        `
+                    }
+
+
+                    <div class="project-number">
+
+                        ${number} / ${total}
+
+                    </div>
+
+                </div>
+
+
+                <div class="project-info">
+
+                    <div class="project-details">
+
+                        <div class="project-title">
+
+                            ${escapeHTML(
+                                project.name ||
+                                "PROJECT"
+                            )}
+
+                        </div>
+
+
+                        <div class="project-type">
+
+                            ${escapeHTML(
+                                project.type ||
+                                "Digital Experience"
+                            )}
+
+                        </div>
+
+
+                        ${
+                            project.description
+                            ?
+                            `
+                            <div class="project-description">
+
+                                ${escapeHTML(
+                                    project.description
+                                )}
+
+                            </div>
+                            `
+                            :
+                            ""
+                        }
+
+
+                        ${
+                            url
+                            ?
+                            `
+                            <a
+                                href="${escapeHTML(url)}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="project-link">
+
+                                ↗ ${escapeHTML(url)}
+
+                            </a>
+                            `
+                            :
+                            ""
+                        }
+
+                    </div>
+
+
+                    ${
+                        url
+                        ?
+                        `
+                        <a
+                            href="${escapeHTML(url)}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="project-arrow"
+                            aria-label="Open project">
+
+                            ↗
+
+                        </a>
+                        `
+                        :
+                        `
+                        <div class="project-arrow">
+
+                            ↗
+
+                        </div>
+                        `
+                    }
+
+                </div>
+
+            `;
+
+
+            container.appendChild(card);
+
+        });
+
+
+        observeRevealElements(
+            container.querySelectorAll(".project")
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "WEBSITE PROJECTS ERROR:",
+            error
+        );
+
+
+        container.innerHTML=`
+
+            <div class="projects-empty">
+
+                Unable to load projects.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   LOADER
+===================================================== */
+
+setTimeout(()=>{
+
+    const loader =
+    document.getElementById("loader");
+
+    if(loader){
+
+        loader.classList.add("hide");
+
+    }
+
+},700);
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+const navbar =
+document.getElementById("navbar");
+
+
+window.addEventListener("scroll",()=>{
+
+    if(window.scrollY>40){
+
+        navbar.classList.add("scrolled");
+
+    }else{
+
+        navbar.classList.remove("scrolled");
+
+    }
+
+});
+
+
+/* =====================================================
+   PARALLAX
+===================================================== */
+
+const giantLogo =
+document.getElementById("giantLogo");
+
+let mouseX=0;
+let mouseY=0;
+
+let currentX=0;
+let currentY=0;
+
+
+window.addEventListener("mousemove",event=>{
+
+    mouseX =
+    (event.clientX/window.innerWidth-.5)*35;
+
+    mouseY =
+    (event.clientY/window.innerHeight-.5)*35;
+
+});
+
+
+function animateLogo(){
+
+    currentX +=
+    (mouseX-currentX)*.06;
+
+    currentY +=
+    (mouseY-currentY)*.06;
+
+
+    giantLogo.style.setProperty(
+        "--mx",
+        `${currentX}px`
+    );
+
+
+    giantLogo.style.setProperty(
+        "--my",
+        `${currentY}px`
+    );
+
+
+    requestAnimationFrame(
+        animateLogo
+    );
+
+}
+
+animateLogo();
+
+
+/* =====================================================
+   HERO FADE
+===================================================== */
+
+window.addEventListener("scroll",()=>{
+
+    const scroll =
+    window.scrollY;
+
+
+    if(giantLogo){
+
+        giantLogo.style.opacity =
+        Math.max(0,1-scroll/450);
+
+    }
+
+});
+
+
+/* =====================================================
+   MOBILE MENU
+===================================================== */
+
+const menuBtn =
+document.getElementById("menuBtn");
+
+const mobileMenu =
+document.getElementById("mobileMenu");
+
+
+menuBtn.addEventListener("click",()=>{
+
+    mobileMenu.classList.toggle("open");
+
+    document.body.classList.toggle("menu-open");
+
+
+    menuBtn.textContent =
+    mobileMenu.classList.contains("open")
+    ? "×"
+    : "☰";
+
+});
+
+
+mobileMenu
+.querySelectorAll("a")
+.forEach(link=>{
+
+    link.addEventListener("click",()=>{
+
+        mobileMenu.classList.remove("open");
+
+        document.body.classList.remove("menu-open");
+
+        menuBtn.textContent="☰";
+
+    });
+
+});
+
+
+/* =====================================================
+   CONTACT FORM
+===================================================== */
+
+const contactForm =
+document.getElementById("contactForm");
+
+
+contactForm.addEventListener(
+"submit",
+async event=>{
+
+    event.preventDefault();
+
+
+    const submitButton =
+    contactForm.querySelector(
+        ".form-submit"
+    );
+
+
+    submitButton.disabled=true;
+
+    submitButton.textContent=
+    "Sending...";
+
+
+    try{
+
+        const fields =
+        contactForm.querySelectorAll(
+            "[data-field-id]"
+        );
+
+
+        const formData={};
+
+
+        fields.forEach(field=>{
+
+            const fieldId =
+            field.getAttribute(
+                "data-field-id"
+            );
+
+
+            formData[fieldId] =
+            field.value.trim();
+
+        });
+
+
+        const recipientEmail =
+        String(
+            siteSettings
+            .contactForm
+            .recipientEmail || ""
+        ).trim();
+
+
+        await db
+        .collection("project_requests")
+        .add({
+
+            fields:formData,
+
+            recipientEmail:
+            recipientEmail,
+
+            status:"جديد",
+
+            createdAt:
+            firebase.firestore
+            .FieldValue
+            .serverTimestamp()
+
+        });
+
+
+        alert(
+            "تم إرسال طلب المشروع بنجاح."
+        );
+
+
+        contactForm.reset();
+
+
+    }catch(error){
+
+        console.error(
+            "Error sending project request:",
+            error
+        );
+
+
+        alert(
+            "حدث خطأ أثناء إرسال الطلب. حاول مرة أخرى."
+        );
+
+
+    }finally{
+
+        submitButton.disabled=false;
+
+        submitButton.textContent=
+        "Send Project Request ↗";
+
+    }
+
+});
+
+
+/* =====================================================
+   REVEAL
+===================================================== */
+
+let revealObserver;
+
+
+function observeRevealElements(elements){
+
+    if(!revealObserver){
+
+        revealObserver =
+        new IntersectionObserver(
+        entries=>{
+
+            entries.forEach(entry=>{
+
+                if(entry.isIntersecting){
+
+                    entry.target.style.opacity="1";
+
+                    entry.target.style.transform=
+                    "translateY(0)";
+
+
+                    revealObserver.unobserve(
+                        entry.target
+                    );
+
+                }
+
+            });
+
+        },
+        {
+            threshold:.12
+        }
+        );
+
+    }
+
+
+    elements.forEach(element=>{
+
+        element.style.opacity="0";
+
+        element.style.transform=
+        "translateY(30px)";
+
+        element.style.transition=
+        "opacity .8s ease, transform .8s ease";
+
+
+        revealObserver.observe(element);
+
+    });
+
+}
+
+
+observeRevealElements(
+    document.querySelectorAll(
+        ".service,.process-item,.stat"
+    )
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+loadSiteSettings();
+
+loadWebsiteProjects();
+
+</script>
+
+</body>
+</html>
